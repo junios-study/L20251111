@@ -6,6 +6,14 @@
 #include "GameFramework/Pawn.h"
 #include "P38_Pawn.generated.h"
 
+class UBoxComponent;
+class UStaticMeshComponent;
+class UCameraComponent;
+class UFloatingPawnMovement;
+class USpringArmComponent;
+class UArrowComponent;
+struct FInputActionValue;
+
 UCLASS()
 class L20251111_API AP38_Pawn : public APawn
 {
@@ -34,5 +42,29 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
 	TSubclassOf<class ARocketBase> RocketTemplate;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UBoxComponent* Box;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* Body;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* Left;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* Right;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	USpringArmComponent* SpringArm;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UCameraComponent* Camera;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UFloatingPawnMovement* Movement;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	UArrowComponent* Arrow;
 
 };

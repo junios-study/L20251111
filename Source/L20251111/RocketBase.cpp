@@ -32,6 +32,10 @@ ARocketBase::ARocketBase()
 void ARocketBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SetLifeSpan(3.0f);
+
+	OnActorBeginOverlap.AddDynamic(this, &ARocketBase::ProcessActorBeginOver);
 	
 }
 
@@ -40,5 +44,21 @@ void ARocketBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ARocketBase::ProcessActorBeginOver(AActor* OverlappedActor, AActor* OtherActor)
+{
+	if (OtherActor->ActorHasTag(TEXT("Target")))
+	{
+		UGameplayStatics::ApplyDamage(
+			OtherActor,
+			100,
+			UGameplayStatics::GetPlayerController(GetWorld(), 0),
+			this,
+			UDamageType::StaticClass()
+		);
+
+		Destroy();
+	}
 }
 

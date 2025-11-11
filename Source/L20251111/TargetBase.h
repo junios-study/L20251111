@@ -23,4 +23,27 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	TObjectPtr <class UBoxComponent> Box;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Components")
+	TObjectPtr <class UStaticMeshComponent> Sphere;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Data")
+	TObjectPtr <class UParticleSystem> P_Explosion;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Data")
+	TObjectPtr <class USoundBase> Cue_Explosion;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void DoDesigner();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void DoDesigner2();
+	void DoDesigner2_Implementation();
+
+	UFUNCTION(BlueprintPure)
+	static int32 GetGold();
 };
